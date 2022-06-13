@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.sh.mybatis">
+  
+	<insert id="insertMem">
+		insert into batismember values (null, #{id}, #{pw}, #{email}, #{name}, #{phone}, #{birth}, now(), default)
+	</insert>
+	
+	<select id="selectIdDataMem" resultType="Integer">
+		select count(*) from batismember where id=#{id}
+	</select>
+	
+	<select id="selectAllMem" resultType="com.sh.app.membean.MemDTO">
+		select * from batismember
+	</select>
+	
+	<select id="selectLoginMem" resultType="com.sh.app.membean.MemDTO">
+		select * from batismember where id=#{id} and pw=#{pw}
+	</select>
+	
+	
+	
+	<select id="selectAllBoard" resultType="com.sh.app.boardbean.BoardDTO">
+		select * from batisboard
+	</select>
+	
+	<select id="selectAllCntBoard" resultType="Integer">
+		select count(idx) from batisboard
+	</select>
+	
+	<select id="selectAllBoardPaging" resultType="com.sh.app.boardbean.BoardDTO">
+		select * from batisboard limit #{numTmp}, #{pageSize}
+	</select>
+	
+	<select id="selectSearchCntBoard" resultType="Integer">
+		select count(idx) from batisboard where title like CONCAT('%',#{title},'%')
+	</select>
+	
+	<select id="selectSearchBoard" resultType="com.sh.app.boardbean.BoardDTO">
+		select * from batisboard where title like CONCAT('%',#{title},'%') limit #{numTmp}, #{pageSize}
+	</select>
+	
+	<insert id="insertBoardData">
+		insert into batisboard values (null, #{id}, #{name}, #{title}, #{content}, #{filename}, now(), default)
+	</insert>
+	
+	<select id="selectOneBoard" resultType="com.sh.app.boardbean.BoardDTO">
+		select * from batisboard where idx = #{idx}
+	</select>
+	
+	<delete id="deleteBoard">
+		delete from batisboard where idx=#{idx}
+	</delete>
+	
+	<update id="updateBoard">
+		update batisboard set title=#{title}, content=#{content}, img=#{filename} where idx=#{idx}
+	</update>
+</mapper>
