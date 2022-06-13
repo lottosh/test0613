@@ -10,6 +10,8 @@ public class BoardDTO {
 	private String regdate;
 	private int hit;
 	
+	// DTO에 주석달기
+	
 	public BoardDTO() {
 		// TODO Auto-generated constructor stub
 	}
